@@ -1,0 +1,21 @@
+{
+	"version": "0.0.3",
+	"author": "fancy Development - Daniel Murrmann",
+	"description": "Builds form and schema JSON from data transfer objects.",
+	"dependencies": {
+		"Newtonsoft.Json": "7.0.1"
+	},
+	"frameworks":{
+		"net45": {},
+		"dnx451": {},
+		"dnxcore50":{
+			"dependencies":{
+				"System.Reflection.Extensions": "4.0.0-*", 
+				"System.Reflection.TypeExtensions": "4.0.0-*",
+				"System.Dynamic.Runtime": "4.0.0-*",
+				"System.Collections": "4.0.10-beta-*", 
+				"System.Linq": "4.0.0-beta-*"
+			}
+		}
+	}
+}
