@@ -38,10 +38,10 @@ namespace Fancy.SchemaFormBuilder.Services
         protected override void ConfigureFormBuilder(FormBuilder formBuilder)
         {
             formBuilder.UseSectionModule();
+            formBuilder.UseTextFormModule();
             formBuilder.UseHelpModule();
             formBuilder.UseSubObjectModule();
             formBuilder.UseArrayModule();
-            formBuilder.UseTextFormModule();
             formBuilder.UseTitleKeyModule();
             formBuilder.UseEnumTitleMapModule();
             formBuilder.UseDisplayModule();

@@ -65,13 +65,7 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
         /// <param name="formSection">The form section.</param>
         public void UpdateFormHierarchyObject(JObject hierarchyObject, FormSectionAttribute formSection)
         {
-            hierarchyObject["type"] = this.ConvertSectionType(formSection.SectionType);
-
-            if (formSection.SectionType == SectionType.Fieldset)
-            {
-                // If the section type is a fieldset then create a new row.
-                hierarchyObject["htmlClass"] = "row";
-            }
+            hierarchyObject["type"] = ConvertSectionType(formSection.SectionType);
 
             if (!string.IsNullOrEmpty(formSection.Title))
             {
