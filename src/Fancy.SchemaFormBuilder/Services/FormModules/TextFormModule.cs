@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 
 using Fancy.SchemaFormBuilder.Annotations;
-
+using Fancy.SchemaFormBuilder.Providers;
 using Newtonsoft.Json.Linq;
 
 namespace Fancy.SchemaFormBuilder.Services.FormModules
@@ -11,13 +11,21 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
     /// <summary>
     /// Adds text information to the form if the current property has the form text attribute.
     /// </summary>
-    public class TextFormModule : IFormBuilderModule
+    public class TextFormModule : FormModuleBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TextFormModule" /> class.
+        /// </summary>
+        /// <param name="languageProvider">The language provider.</param>
+        public TextFormModule(ILanguageProvider languageProvider) : base(languageProvider)
+        {
+        }
+
         /// <summary>
         /// Processes the specified context.
         /// </summary>
         /// <param name="context">The context to process.</param>
-        public void Process(FormBuilderContext context)
+        public override void Process(FormBuilderContext context)
         {
             // Get all help attributes
             List<FormTextAttribute> texts = context.Property.GetCustomAttributes<FormTextAttribute>().ToList();
@@ -28,12 +36,14 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
                 return;
             }
 
-            foreach (FormTextAttribute text in texts)
+            foreach (FormTextAttribute textAttribute in texts)
             {
+                string text = GetTextForKey(textAttribute.Text, context.TargetCulture);
+
                 // Create the help JSON object
                 JObject textObject = new JObject();
                 textObject["type"] = new JValue("help");
-                textObject["helpvalue"] = new JValue("<p>" + text.Text + "</p>");
+                textObject["helpvalue"] = new JValue("<p>" + text + "</p>");
 
                 context.CurrentFormElementParent.Add(textObject);
             }

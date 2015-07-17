@@ -8,13 +8,13 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
     /// <summary>
     /// Adds properties of sub objects to the form if the current property is a form sub object.
     /// </summary>
-    public class SubObjectFormModule : IFormBuilderModule
+    public class SubObjectFormModule : FormModuleBase
     {
         /// <summary>
         /// Processes the specified context.
         /// </summary>
         /// <param name="context">The context to process.</param>
-        public void Process(FormBuilderContext context)
+        public override void Process(FormBuilderContext context)
         {
             // Test to the form subobject attribute
             if (context.Property.GetCustomAttribute<FormSubObjectAttribute>() != null)

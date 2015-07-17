@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 
 using Fancy.SchemaFormBuilder.Annotations;
-
+using Fancy.SchemaFormBuilder.Providers;
 using Newtonsoft.Json.Linq;
 
 namespace Fancy.SchemaFormBuilder.Services.FormModules
@@ -12,13 +12,21 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
     /// <summary>
     /// Adds help information to the form if the current property has the help attribute.
     /// </summary>
-    public class HelpFormModule : IFormBuilderModule
+    public class HelpFormModule : FormModuleBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HelpFormModule" /> class.
+        /// </summary>
+        /// <param name="languageProvider">The language provider.</param>
+        public HelpFormModule(ILanguageProvider languageProvider) : base(languageProvider)
+        {
+        }
+
         /// <summary>
         /// Processes the specified context.
         /// </summary>
         /// <param name="context">The context to process.</param>
-        public void Process(FormBuilderContext context)
+        public override void Process(FormBuilderContext context)
         {
             // Get all help attributes
             List<FormHelpAttribute> helps = context.Property.GetCustomAttributes<FormHelpAttribute>().ToList();
@@ -33,10 +41,12 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
             {
                 string helpCssClases = DetermineHelpCssClasses(help.HelpType);
 
+                string helpText = GetTextForKey(help.HelpText, context.TargetCulture);
+
                 // Create the help JSON object
                 JObject helpObject = new JObject();
                 helpObject["type"] = new JValue("help");
-                helpObject["helpvalue"] = new JValue("<div class=\"" + helpCssClases + "\" >" + help.HelpText + "</div>");
+                helpObject["helpvalue"] = new JValue("<div class=\"" + helpCssClases + "\" >" + helpText + "</div>");
 
                 if (!string.IsNullOrEmpty(help.Condition))
                 {

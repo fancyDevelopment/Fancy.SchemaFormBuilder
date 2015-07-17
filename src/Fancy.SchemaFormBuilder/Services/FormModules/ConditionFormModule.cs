@@ -9,13 +9,13 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
     /// <summary>
     /// Adds a condition to the current form element.
     /// </summary>
-    public class ConditionFormModule : IFormBuilderModule
+    public class ConditionFormModule : FormModuleBase
     {
         /// <summary>
         /// Processes the specified context.
         /// </summary>
         /// <param name="context">The context to process.</param>
-        public void Process(FormBuilderContext context)
+        public override void Process(FormBuilderContext context)
         {
             // Get the attribute
             FormConditionAttribute conditionAttribute = context.Property.GetCustomAttribute<FormConditionAttribute>();

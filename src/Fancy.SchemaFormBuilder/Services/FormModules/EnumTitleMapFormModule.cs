@@ -2,7 +2,7 @@
 using System.Reflection;
 
 using Fancy.SchemaFormBuilder.Annotations;
-
+using Fancy.SchemaFormBuilder.Providers;
 using Newtonsoft.Json.Linq;
 
 namespace Fancy.SchemaFormBuilder.Services.FormModules
@@ -10,13 +10,21 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
     /// <summary>
     /// Adds a title map to the form if the current property is an enumeration and the enumeration fields have a title.
     /// </summary>
-    public class EnumTitleMapFormModule : IFormBuilderModule
+    public class EnumTitleMapFormModule : FormModuleBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EnumTitleMapFormModule" /> class.
+        /// </summary>
+        /// <param name="languageProvider">The language provider.</param>
+        public EnumTitleMapFormModule(ILanguageProvider languageProvider) : base(languageProvider)
+        {
+        }
+
         /// <summary>
         /// Processes the specified context.
         /// </summary>
         /// <param name="context">The context to process.</param>
-        public void Process(FormBuilderContext context)
+        public override void Process(FormBuilderContext context)
         {
             Type propertyType = context.Property.PropertyType;
 
@@ -48,7 +56,8 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
 
                     if (enumMember.GetCustomAttribute<FormTitleAttribute>() != null)
                     {
-                        title["name"] = enumMember.GetCustomAttribute<FormTitleAttribute>().Title;
+                        string titleKey = enumMember.GetCustomAttribute<FormTitleAttribute>().Title;
+                        title["name"] = GetTextForKey(titleKey, context.TargetCulture);
                         titleMap.Add(title);
                     }
                 }

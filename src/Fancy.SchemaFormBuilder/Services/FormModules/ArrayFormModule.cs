@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Fancy.SchemaFormBuilder.Annotations;
+using Fancy.SchemaFormBuilder.Providers;
 using Newtonsoft.Json.Linq;
 
 namespace Fancy.SchemaFormBuilder.Services.FormModules
@@ -10,13 +11,21 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
     /// <summary>
     /// Adds properties of sub objects to the form if the current property is a form sub object.
     /// </summary>
-    public class ArrayFormModule : IFormBuilderModule
+    public class ArrayFormModule : FormModuleBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ArrayFormModule" /> class.
+        /// </summary>
+        /// <param name="languageProvider">The language provider.</param>
+        public ArrayFormModule(ILanguageProvider languageProvider) : base(languageProvider)
+        {
+        }
+
         /// <summary>
         /// Processes the specified context.
         /// </summary>
         /// <param name="context">The context to process.</param>
-        public void Process(FormBuilderContext context)
+        public override void Process(FormBuilderContext context)
         {
             FormArrayAttribute arrayAttribute = context.Property.GetCustomAttribute<FormArrayAttribute>();
                 
@@ -40,7 +49,8 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
 
                     if (!string.IsNullOrEmpty(arrayAttribute.AddButtonTitle))
                     {
-                        currentFormElement["add"] = new JValue(arrayAttribute.AddButtonTitle);
+                        string addText = GetTextForKey(arrayAttribute.AddButtonTitle, context.TargetCulture);
+                        currentFormElement["add"] = new JValue(addText);
                     }
                 }
                 else

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
 using Fancy.SchemaFormBuilder.Annotations;
-
+using Fancy.SchemaFormBuilder.Providers;
 using Newtonsoft.Json.Linq;
 
 namespace Fancy.SchemaFormBuilder.Services.FormModules
@@ -12,7 +13,7 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
     /// <summary>
     /// Builds up sections for the form.
     /// </summary>
-    public class SectionFormModule : IFormBuilderModule
+    public class SectionFormModule : FormModuleBase
     {
         /// <summary>
         /// The hierarchy path property name, used to navigate through the form hierarchies
@@ -20,10 +21,18 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
         private const string HierarchyPathPropertyName = "hierarchyPath";
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="SectionFormModule" /> class.
+        /// </summary>
+        /// <param name="languageProvider">The language provider.</param>
+        public SectionFormModule(ILanguageProvider languageProvider) : base(languageProvider)
+        {
+        }
+
+        /// <summary>
         /// Processes the specified context.
         /// </summary>
         /// <param name="context">The context to process.</param>
-        public void Process(FormBuilderContext context)
+        public override void Process(FormBuilderContext context)
         {
             // Get all form hierarchy attributes
             List<FormSectionAttribute> formHierarchies = context.Property.GetCustomAttributes<FormSectionAttribute>().ToList();
@@ -41,7 +50,7 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
                 // Is the hierarchy already in the form?
                 hierachyObject = FindFormHierarchyObject(context.CompleteForm, formHierarchy.HierarchyPath, true);
 
-                UpdateFormHierarchyObject(hierachyObject, formHierarchy);
+                UpdateFormHierarchyObject(hierachyObject, formHierarchy, context.TargetCulture);
             }
 
             // ReSharper disable once PossibleNullReferenceException because we make sure to have at least one object in the hierarcy
@@ -63,13 +72,13 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
         /// </summary>
         /// <param name="hierarchyObject">The hierarchy object.</param>
         /// <param name="formSection">The form section.</param>
-        public void UpdateFormHierarchyObject(JObject hierarchyObject, FormSectionAttribute formSection)
+        public void UpdateFormHierarchyObject(JObject hierarchyObject, FormSectionAttribute formSection, CultureInfo targetCulture)
         {
             hierarchyObject["type"] = ConvertSectionType(formSection.SectionType);
 
             if (!string.IsNullOrEmpty(formSection.Title))
             {
-                hierarchyObject["title"] = formSection.Title;
+                hierarchyObject["title"] = GetTextForKey(formSection.Title, targetCulture);
             }
         }
 

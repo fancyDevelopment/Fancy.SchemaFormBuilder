@@ -7,13 +7,13 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
     /// <summary>
     /// Configures an element how to display it.
     /// </summary>
-    public class DisplayFormModule : IFormBuilderModule
+    public class DisplayFormModule : FormModuleBase
     {
         /// <summary>
         /// Processes the specified context.
         /// </summary>
         /// <param name="context">The context to process.</param>
-        public void Process(FormBuilderContext context)
+        public override void Process(FormBuilderContext context)
         {
             if (context.Property.GetCustomAttribute<FormDisplayAttribute>() != null)
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Reflection;
 
 using Newtonsoft.Json.Linq;
@@ -77,6 +78,14 @@ namespace Fancy.SchemaFormBuilder.Services
         ///   <c>true</c> if the shall finish the processing; otherwise, <c>false</c>.
         /// </value>
         public bool FinishProcessing { get; set; }
+
+        /// <summary>
+        /// Gets or sets the target culture.
+        /// </summary>
+        /// <value>
+        /// The target culture.
+        /// </value>
+        public CultureInfo TargetCulture { get; set; }
 
         /// <summary>
         /// Gets the or the current form element. If it does not exist yet it will be created.

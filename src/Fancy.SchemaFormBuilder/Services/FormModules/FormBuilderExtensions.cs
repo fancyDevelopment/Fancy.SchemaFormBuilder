@@ -1,4 +1,6 @@
-﻿namespace Fancy.SchemaFormBuilder.Services.FormModules
+﻿using Fancy.SchemaFormBuilder.Providers;
+
+namespace Fancy.SchemaFormBuilder.Services.FormModules
 {
     /// <summary>
     /// Extension methods to conveniently configure the form builder pipeline.
@@ -18,27 +20,30 @@
         /// Adds the section module to the pipeline.
         /// </summary>
         /// <param name="formBuilder">The form builder.</param>
-        public static void UseSectionModule(this FormBuilder formBuilder)
+        /// <param name="languageProvider">The language provider.</param>
+        public static void UseSectionModule(this FormBuilder formBuilder, ILanguageProvider languageProvider)
         {
-            formBuilder.AddPipelineModule(new SectionFormModule());
+            formBuilder.AddPipelineModule(new SectionFormModule(languageProvider));
         }
 
         /// <summary>
         /// Adds the help module to the pipeline.
         /// </summary>
         /// <param name="formBuilder">The form builder.</param>
-        public static void UseHelpModule(this FormBuilder formBuilder)
+        /// <param name="languageProvider">The language provider.</param>
+        public static void UseHelpModule(this FormBuilder formBuilder, ILanguageProvider languageProvider)
         {
-            formBuilder.AddPipelineModule(new HelpFormModule());
+            formBuilder.AddPipelineModule(new HelpFormModule(languageProvider));
         }
 
         /// <summary>
         /// Adds the text form module to the pipeline.
         /// </summary>
         /// <param name="formBuilder">The form builder.</param>
-        public static void UseTextFormModule(this FormBuilder formBuilder)
+        /// <param name="languageProvider">The language provider.</param>
+        public static void UseTextFormModule(this FormBuilder formBuilder, ILanguageProvider languageProvider)
         {
-            formBuilder.AddPipelineModule(new TextFormModule());
+            formBuilder.AddPipelineModule(new TextFormModule(languageProvider));
         }
 
         /// <summary>
@@ -54,9 +59,10 @@
         /// Adds the enumeration title map module to the pipeline.
         /// </summary>
         /// <param name="formBuilder">The form builder.</param>
-        public static void UseEnumTitleMapModule(this FormBuilder formBuilder)
+        /// <param name="languageProvider">The language provider.</param>
+        public static void UseEnumTitleMapModule(this FormBuilder formBuilder, ILanguageProvider languageProvider)
         {
-            formBuilder.AddPipelineModule(new EnumTitleMapFormModule());
+            formBuilder.AddPipelineModule(new EnumTitleMapFormModule(languageProvider));
         }
 
         /// <summary>
@@ -72,27 +78,28 @@
         /// Adds the simple choice module to the pipeline.
         /// </summary>
         /// <param name="formBuilder">The form builder.</param>
-        public static void UseSimpleChoiceModule(this FormBuilder formBuilder)
+        /// <param name="languageProvider">The language provider.</param>
+        public static void UseSimpleChoiceModule(this FormBuilder formBuilder, ILanguageProvider languageProvider)
         {
-            formBuilder.AddPipelineModule(new SimpleChoiceTitleMapFormModule());
+            formBuilder.AddPipelineModule(new SimpleChoiceTitleMapFormModule(languageProvider));
         }
 
         /// <summary>
         /// Adds the bool as title map module to the pipeline.
         /// </summary>
         /// <param name="formBuilder">The form builder.</param>
-        public static void UseBoolAsTitleMapModule(this FormBuilder formBuilder)
+        public static void UseBoolAsTitleMapModule(this FormBuilder formBuilder, ILanguageProvider languageProvider)
         {
-            formBuilder.AddPipelineModule(new BoolAsRadiosFormModule());
+            formBuilder.AddPipelineModule(new BoolAsRadiosFormModule(languageProvider));
         }
 
         /// <summary>
         /// Uses the array module.
         /// </summary>
         /// <param name="formBuilder">The form builder.</param>
-        public static void UseArrayModule(this FormBuilder formBuilder)
+        public static void UseArrayModule(this FormBuilder formBuilder, ILanguageProvider languageProvider)
         {
-            formBuilder.AddPipelineModule(new ArrayFormModule());
+            formBuilder.AddPipelineModule(new ArrayFormModule(languageProvider));
         }
 
         /// <summary>

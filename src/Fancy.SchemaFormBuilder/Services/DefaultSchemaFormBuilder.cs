@@ -15,20 +15,27 @@ namespace Fancy.SchemaFormBuilder.Services
         private readonly IUrlLookupProvider _urlLookupProvider;
 
         /// <summary>
+        /// The language provider.
+        /// </summary>
+        private readonly ILanguageProvider _languageProvider;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="DefaultSchemaFormBuilder"/> class.
         /// </summary>
         public DefaultSchemaFormBuilder()
         {
             _urlLookupProvider = null;
+            _languageProvider = null;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultSchemaFormBuilder"/> class.
         /// </summary>
         /// <param name="urlLookupProvider">The URL lookup provider.</param>
-        public DefaultSchemaFormBuilder(IUrlLookupProvider urlLookupProvider)
+        public DefaultSchemaFormBuilder(IUrlLookupProvider urlLookupProvider, ILanguageProvider languageProvider)
         {
             _urlLookupProvider = urlLookupProvider;
+            _languageProvider = languageProvider;
         }
 
         /// <summary>
@@ -37,16 +44,16 @@ namespace Fancy.SchemaFormBuilder.Services
         /// <param name="formBuilder">The form builder.</param>
         protected override void ConfigureFormBuilder(FormBuilder formBuilder)
         {
-            formBuilder.UseSectionModule();
-            formBuilder.UseTextFormModule();
-            formBuilder.UseHelpModule();
+            formBuilder.UseSectionModule(_languageProvider);
+            formBuilder.UseTextFormModule(_languageProvider);
+            formBuilder.UseHelpModule(_languageProvider);
             formBuilder.UseSubObjectModule();
-            formBuilder.UseArrayModule();
+            formBuilder.UseArrayModule(_languageProvider);
             formBuilder.UseTitleKeyModule();
-            formBuilder.UseEnumTitleMapModule();
+            formBuilder.UseEnumTitleMapModule(_languageProvider);
             formBuilder.UseDisplayModule();
-            formBuilder.UseSimpleChoiceModule();
-            formBuilder.UseBoolAsTitleMapModule();
+            formBuilder.UseSimpleChoiceModule(_languageProvider);
+            formBuilder.UseBoolAsTitleMapModule(_languageProvider);
             formBuilder.UseConditionModule();
         }
 
