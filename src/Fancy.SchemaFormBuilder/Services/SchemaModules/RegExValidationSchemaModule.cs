@@ -9,13 +9,13 @@ namespace Fancy.SchemaFormBuilder.Services.SchemaModules
     /// <summary>
     /// Identifies weather a property has a regular expression and adds the patter to the schema element.
     /// </summary>
-    public class RegExValidationSchemaModule : ISchemaBuilderModule
+    public class RegExValidationSchemaModule : SchmeaModuleBase
     {
         /// <summary>
         /// Processes the specified context.
         /// </summary>
         /// <param name="context">The context to process.</param>
-        public void Process(SchemaBuilderContext context)
+        public override void Process(SchemaBuilderContext context)
         {
             if (context.Property.GetCustomAttribute<FormRegExValidationAttribute>() != null)
             {

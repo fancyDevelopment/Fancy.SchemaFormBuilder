@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Fancy.SchemaFormBuilder.Annotations;
 using Newtonsoft.Json.Linq;
+using System.Globalization;
 
 namespace Fancy.SchemaFormBuilder.Services
 {
@@ -31,7 +32,7 @@ namespace Fancy.SchemaFormBuilder.Services
         /// <returns>
         /// The JSON schema.
         /// </returns>
-        public JObject BuildSchema(Type type)
+        public JObject BuildSchema(Type type, CultureInfo cultureInfo)
         {
             PropertyInfo[] propertyInfos = type.GetProperties();
             
@@ -41,7 +42,7 @@ namespace Fancy.SchemaFormBuilder.Services
             // Run through each property of the type
             foreach (PropertyInfo propertyInfo in propertyInfos)
             {
-                SchemaElement element = ProcessProperty(propertyInfo);
+                SchemaElement element = ProcessProperty(propertyInfo, cultureInfo);
 
                 if (element.Schema != null)
                 {
@@ -87,12 +88,13 @@ namespace Fancy.SchemaFormBuilder.Services
         /// </summary>
         /// <param name="propertyInfo">The property information.</param>
         /// <returns>The schema element.</returns>
-        private SchemaElement ProcessProperty(PropertyInfo propertyInfo)
+        private SchemaElement ProcessProperty(PropertyInfo propertyInfo, CultureInfo cultureInfo)
         {
             // Create the context for this property
             SchemaBuilderContext context = new SchemaBuilderContext();
             context.Property = propertyInfo;
             context.SchemaBuilder = this;
+            context.TargetCulture = cultureInfo;
 
             // Run the property through each pipeline module
             foreach (ISchemaBuilderModule builderModule in _pipelineModules)

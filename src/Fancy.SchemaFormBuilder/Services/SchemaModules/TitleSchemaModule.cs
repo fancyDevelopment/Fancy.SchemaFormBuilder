@@ -3,19 +3,28 @@
 using Fancy.SchemaFormBuilder.Annotations;
 
 using Newtonsoft.Json.Linq;
+using Fancy.SchemaFormBuilder.Providers;
 
 namespace Fancy.SchemaFormBuilder.Services.SchemaModules
 {
     /// <summary>
     /// Identifies weather a property is required and adds the information to the context.
     /// </summary>
-    public class TitleSchemaModule : ISchemaBuilderModule
+    public class TitleSchemaModule : SchmeaModuleBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TitleSchemaModule" /> class.
+        /// </summary>
+        /// <param name="languageProvider">The language provider.</param>
+        public TitleSchemaModule(ILanguageProvider languageProvider) : base(languageProvider)
+        {
+        }
+
         /// <summary>
         /// Processes the specified context.
         /// </summary>
         /// <param name="context">The context to process.</param>
-        public void Process(SchemaBuilderContext context)
+        public override void Process(SchemaBuilderContext context)
         {
             if (context.Property.GetCustomAttribute<FormTitleAttribute>() != null)
             {
@@ -24,7 +33,7 @@ namespace Fancy.SchemaFormBuilder.Services.SchemaModules
                 JObject schemaObject = context.Element.GetOrCreateSchemaObject();
 
                 // Set the title to the current element
-                schemaObject["title"] = title;
+                schemaObject["title"] = GetTextForKey(title, context.TargetCulture);
             }
         }
     }

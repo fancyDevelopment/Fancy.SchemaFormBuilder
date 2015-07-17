@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Fancy.SchemaFormBuilder.Services
 {
@@ -22,7 +23,7 @@ namespace Fancy.SchemaFormBuilder.Services
         /// </summary>
         public SchemaFormBuilderBase()
         {
-            this.Initialize();
+            Initialize();
         }
 
         /// <summary>
@@ -34,10 +35,22 @@ namespace Fancy.SchemaFormBuilder.Services
         /// </returns>
         public SchemaFormInfo CreateSchemaForm(Type type)
         {
+            return CreateSchemaForm(type, null);
+        }
+
+        /// <summary>
+        /// Creates the schema form info object to the specified type.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>
+        /// The schema form info.
+        /// </returns>
+        public SchemaFormInfo CreateSchemaForm(Type type, CultureInfo cultureInfo)
+        {
             SchemaFormInfo result = new SchemaFormInfo();
 
-            result.Schema = this._schemaBuilder.BuildSchema(type);
-            result.Form = this._formBuilder.BuildForm(type);
+            result.Schema = _schemaBuilder.BuildSchema(type, cultureInfo);
+            result.Form = _formBuilder.BuildForm(type, cultureInfo);
             result.Type = type;
 
             return result;
@@ -60,11 +73,11 @@ namespace Fancy.SchemaFormBuilder.Services
         /// </summary>
         private void Initialize()
         {
-            this._formBuilder = new FormBuilder();
-            this._schemaBuilder = new SchemaBuilder();
+            _formBuilder = new FormBuilder();
+            _schemaBuilder = new SchemaBuilder();
 
-            this.ConfigureFormBuilder(this._formBuilder);
-            this.ConfigureSchemaBuilder(this._schemaBuilder);
+            ConfigureFormBuilder(this._formBuilder);
+            ConfigureSchemaBuilder(this._schemaBuilder);
         }
     }
 }

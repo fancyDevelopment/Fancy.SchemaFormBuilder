@@ -7,13 +7,13 @@ namespace Fancy.SchemaFormBuilder.Services.SchemaModules
     /// <summary>
     /// Adds the type to the schema element.
     /// </summary>
-    public class TypeSchemaModule : ISchemaBuilderModule
+    public class TypeSchemaModule : SchmeaModuleBase
     {
         /// <summary>
         /// Processes the specified context.
         /// </summary>
         /// <param name="context">The context to process.</param>
-        public void Process(SchemaBuilderContext context)
+        public override void Process(SchemaBuilderContext context)
         {
             Type propertyType = DeterminePropertyType(context);
 

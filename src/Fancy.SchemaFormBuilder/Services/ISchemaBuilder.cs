@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Newtonsoft.Json.Linq;
+using System.Globalization;
 
 namespace Fancy.SchemaFormBuilder.Services
 {
@@ -14,6 +15,6 @@ namespace Fancy.SchemaFormBuilder.Services
         /// </summary>
         /// <param name="type">The type to build the schema for.</param>
         /// <returns>The JSON schema.</returns>
-        JObject BuildSchema(Type type);
+        JObject BuildSchema(Type type, CultureInfo cultureInfo);
     }
 }

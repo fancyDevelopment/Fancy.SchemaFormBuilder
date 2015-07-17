@@ -7,13 +7,13 @@ namespace Fancy.SchemaFormBuilder.Services.SchemaModules
     /// <summary>
     /// Identifies weather a property is required and adds the information to the context.
     /// </summary>
-    public class RequiredSchemaModule : ISchemaBuilderModule
+    public class RequiredSchemaModule : SchmeaModuleBase
     {
         /// <summary>
         /// Processes the specified context.
         /// </summary>
         /// <param name="context">The context to process.</param>
-        public void Process(SchemaBuilderContext context)
+        public override void Process(SchemaBuilderContext context)
         {
             if (context.Property.GetCustomAttribute<FormRequiredAttribute>() != null)
             {

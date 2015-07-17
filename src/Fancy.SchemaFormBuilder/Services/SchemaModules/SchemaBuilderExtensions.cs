@@ -56,9 +56,9 @@ namespace Fancy.SchemaFormBuilder.Services.SchemaModules
         /// Adds the title module to the pipeline.
         /// </summary>
         /// <param name="schemaBuilder">The schema builder.</param>
-        public static void UseTitleModule(this SchemaBuilder schemaBuilder)
+        public static void UseTitleModule(this SchemaBuilder schemaBuilder, ILanguageProvider languaageProvider)
         {
-            schemaBuilder.AddPipelineModule(new TitleSchemaModule());
+            schemaBuilder.AddPipelineModule(new TitleSchemaModule(languaageProvider));
         }
 
         /// <summary>
@@ -74,9 +74,9 @@ namespace Fancy.SchemaFormBuilder.Services.SchemaModules
         /// Adds the validation message module to the pipeline.
         /// </summary>
         /// <param name="schemaBuilder">The schema builder.</param>
-        public static void UseValidationMessageModule(this SchemaBuilder schemaBuilder)
+        public static void UseValidationMessageModule(this SchemaBuilder schemaBuilder, ILanguageProvider languaageProvider)
         {
-            schemaBuilder.AddPipelineModule(new ValidationMessageSchemaModule());
+            schemaBuilder.AddPipelineModule(new ValidationMessageSchemaModule(languaageProvider));
         }
 
         /// <summary>

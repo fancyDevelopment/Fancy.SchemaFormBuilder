@@ -10,7 +10,7 @@ namespace Fancy.SchemaFormBuilder.Services.SchemaModules
     /// <summary>
     /// Makes a property of a form a look up property which retrieves its data from an other REST endpoint.
     /// </summary>
-    public class UrlLookupSchemaModule : ISchemaBuilderModule
+    public class UrlLookupSchemaModule : SchmeaModuleBase
     {
         /// <summary>
         /// The url lookup provider.
@@ -30,7 +30,7 @@ namespace Fancy.SchemaFormBuilder.Services.SchemaModules
         /// Processes the specified context.
         /// </summary>
         /// <param name="context">The context to process.</param>
-        public void Process(SchemaBuilderContext context)
+        public override void Process(SchemaBuilderContext context)
         {
             FormUrlLookupAttribute urlLookupAttribute = context.Property.GetCustomAttribute<FormUrlLookupAttribute>();
 

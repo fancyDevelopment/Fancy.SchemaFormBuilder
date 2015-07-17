@@ -8,13 +8,13 @@ namespace Fancy.SchemaFormBuilder.Services.SchemaModules
     /// <summary>
     /// Adds a subobject to the schema.
     /// </summary>
-    public class SubObjectSchemaModule : ISchemaBuilderModule
+    public class SubObjectSchemaModule : SchmeaModuleBase
     {
         /// <summary>
         /// Processes the specified context.
         /// </summary>
         /// <param name="context">The context to process.</param>
-        public void Process(SchemaBuilderContext context)
+        public override void Process(SchemaBuilderContext context)
         {
             if (context.Property.GetCustomAttribute<FormSubObjectAttribute>() != null)
             {
@@ -22,7 +22,7 @@ namespace Fancy.SchemaFormBuilder.Services.SchemaModules
 
                 // A schema type for a simple type could not be found, we assume the property references an complex type
                 // Build the schema for a complext type
-                JObject complexSchema = context.SchemaBuilder.BuildSchema(context.Property.PropertyType);
+                JObject complexSchema = context.SchemaBuilder.BuildSchema(context.Property.PropertyType, context.TargetCulture);
 
                 currentSchemaObject["title"] = new JValue(context.Property.Name);
 

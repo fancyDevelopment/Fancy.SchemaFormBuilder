@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Newtonsoft.Json.Linq;
+using System.Globalization;
 
 namespace Fancy.SchemaFormBuilder.Services
 {
@@ -14,7 +15,7 @@ namespace Fancy.SchemaFormBuilder.Services
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>A description of the form in JSON.</returns>
-        JContainer BuildForm(Type type);
+        JContainer BuildForm(Type type, CultureInfo cultureInfo);
 
         /// <summary>
         /// Builds a sub form starting from a specified property path.
@@ -24,6 +25,6 @@ namespace Fancy.SchemaFormBuilder.Services
         /// <returns>
         /// A description of the form in JSON
         /// </returns>
-        JContainer BuildForm(Type type, string sourcePropertyPath);
+        JContainer BuildForm(Type type, CultureInfo cultureInfo, string sourcePropertyPath);
     }
 }

@@ -23,7 +23,7 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
                 Type subType = context.Property.PropertyType;
 
                 // Create the subform
-                JContainer properties = context.FormBuilder.BuildForm(subType, context.FullPropertyPath);
+                JContainer properties = context.FormBuilder.BuildForm(subType, context.TargetCulture, context.FullPropertyPath);
 
                 // Merge the properties of the sub object into the current context
                 context.CurrentFormElementParent.Merge(properties);

@@ -9,13 +9,13 @@ namespace Fancy.SchemaFormBuilder.Services.SchemaModules
     /// <summary>
     /// Sets the max length to a property if the attribute is declared.
     /// </summary>
-    public class MaxLengthSchemaModule : ISchemaBuilderModule
+    public class MaxLengthSchemaModule : SchmeaModuleBase
     {
         /// <summary>
         /// Processes the specified context.
         /// </summary>
         /// <param name="context">The context to process.</param>
-        public void Process(SchemaBuilderContext context)
+        public override void Process(SchemaBuilderContext context)
         {
             if (context.Property.GetCustomAttribute<FormMaxLengthAttribute>() != null)
             {

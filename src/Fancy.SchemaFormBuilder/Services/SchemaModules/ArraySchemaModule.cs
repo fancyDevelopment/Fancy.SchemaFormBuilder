@@ -10,13 +10,13 @@ namespace Fancy.SchemaFormBuilder.Services.SchemaModules
     /// <summary>
     /// Adds an array to the schema.
     /// </summary>
-    public class ArraySchemaModule : ISchemaBuilderModule
+    public class ArraySchemaModule : SchmeaModuleBase
     {
         /// <summary>
         /// Processes the specified context.
         /// </summary>
         /// <param name="context">The context to process.</param>
-        public void Process(SchemaBuilderContext context)
+        public override void Process(SchemaBuilderContext context)
         {
             FormArrayAttribute arrayAttribute = context.Property.GetCustomAttribute<FormArrayAttribute>();
 
@@ -32,7 +32,7 @@ namespace Fancy.SchemaFormBuilder.Services.SchemaModules
                     Type underlyingType = context.Property.PropertyType.GetGenericArguments()[0];
 
                     // Build the schema for a complext type
-                    JObject complexSchema = context.SchemaBuilder.BuildSchema(underlyingType);
+                    JObject complexSchema = context.SchemaBuilder.BuildSchema(underlyingType, context.TargetCulture);
 
                     currentSchemaObject["title"] = new JValue(context.Property.Name);
                     currentSchemaObject["type"] = new JValue("array");

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 
 using Newtonsoft.Json.Linq;
+using System.Globalization;
 
 namespace Fancy.SchemaFormBuilder.Services
 {
@@ -21,7 +22,7 @@ namespace Fancy.SchemaFormBuilder.Services
         /// </summary>
         public FormBuilder()
         {
-            this._pipelineModules = new List<IFormBuilderModule>();
+            _pipelineModules = new List<IFormBuilderModule>();
         }
 
         /// <summary>
@@ -31,9 +32,9 @@ namespace Fancy.SchemaFormBuilder.Services
         /// <returns>
         /// A description of the form in JSON.
         /// </returns>
-        public JContainer BuildForm(Type type)
+        public JContainer BuildForm(Type type, CultureInfo cultureInfo)
         {
-            return this.BuildForm(type, string.Empty);
+            return BuildForm(type, cultureInfo, string.Empty);
         }
 
         /// <summary>
@@ -44,7 +45,7 @@ namespace Fancy.SchemaFormBuilder.Services
         /// <returns>
         /// A description of the form in JSON
         /// </returns>
-        public JContainer BuildForm(Type type, string sourcePropertyPath)
+        public JContainer BuildForm(Type type, CultureInfo cultureInfo, string sourcePropertyPath)
         {
             PropertyInfo[] propertyInfos = type.GetProperties();
 
@@ -53,7 +54,7 @@ namespace Fancy.SchemaFormBuilder.Services
             // Run through each property of the type
             foreach (PropertyInfo propertyInfo in propertyInfos)
             {
-                formElements = this.ProcessProperty(type, propertyInfo, formElements, sourcePropertyPath);
+                formElements = ProcessProperty(type, propertyInfo, formElements, sourcePropertyPath, cultureInfo);
             }
 
             return formElements;
@@ -65,7 +66,7 @@ namespace Fancy.SchemaFormBuilder.Services
         /// <param name="module">The module.</param>
         public void AddPipelineModule(IFormBuilderModule module)
         {
-            this._pipelineModules.Add(module);
+            _pipelineModules.Add(module);
         }
 
         /// <summary>
@@ -78,7 +79,7 @@ namespace Fancy.SchemaFormBuilder.Services
         /// <returns>
         /// The form element.
         /// </returns>
-        private JArray ProcessProperty(Type objectType, PropertyInfo propertyInfo, JArray formElements, string sourcePropertyPath)
+        private JArray ProcessProperty(Type objectType, PropertyInfo propertyInfo, JArray formElements, string sourcePropertyPath, CultureInfo cultureInfo)
         {
             // Create the context for this property
             FormBuilderContext context = new FormBuilderContext();
@@ -87,6 +88,7 @@ namespace Fancy.SchemaFormBuilder.Services
             context.CompleteForm = formElements;
             context.CurrentFormElementParent = formElements;
             context.FormBuilder = this;
+            context.TargetCulture = cultureInfo;
 
             // Set up the full property path to this property
             context.FullPropertyPath = string.IsNullOrEmpty(sourcePropertyPath)

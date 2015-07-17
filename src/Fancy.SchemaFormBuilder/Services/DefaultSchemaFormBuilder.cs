@@ -67,11 +67,11 @@ namespace Fancy.SchemaFormBuilder.Services
             schemaBuilder.UseTypeModule();
             schemaBuilder.UseSubObjectModule();
             schemaBuilder.UseArrayModule();
-            schemaBuilder.UseTitleModule();
+            schemaBuilder.UseTitleModule(_languageProvider);
             schemaBuilder.UseRequiredModule();
             schemaBuilder.UseRegExValidationModule();
             schemaBuilder.UseMaxLengthModule();
-            schemaBuilder.UseValidationMessageModule();
+            schemaBuilder.UseValidationMessageModule(_languageProvider);
             schemaBuilder.UseUrlLookupProviderModule(_urlLookupProvider);
         }
     }
