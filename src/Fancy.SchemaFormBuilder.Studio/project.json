@@ -1,0 +1,35 @@
+﻿{
+  "webroot": "wwwroot",
+  "version": "1.0.0",
+  "dependencies": {
+    "Newtonsoft.Json": "7.0.1",
+    "Microsoft.AspNet.Mvc": "6.0.0-*",
+    "Microsoft.AspNet.StaticFiles": "1.0.0-*",
+    "Microsoft.AspNet.Server.IIS": "1.0.0-*",
+    "Microsoft.AspNet.Server.WebListener": "1.0.0-*",
+    "Fancy.SchemaFormBuilder": "0.0.4",
+    "Microsoft.CodeAnalysis.CSharp": "1.0.0"
+  },
+  "frameworks": {
+    "dnx451": {
+      "dependencies": {
+      }
+    }
+  },
+    "bundleExclude": [
+        "node_modules",
+        "bower_components",
+        "**.kproj",
+        "**.user",
+        "**.vspscc"
+    ],
+    "commands" : {
+		"web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:5001"
+    },
+    "exclude": [
+        "wwwroot",
+        "node_modules",
+        "bower_components"
+    ],
+    "resource": "Resources/**/*.*"
+}

@@ -1,0 +1,13 @@
+﻿h1 {
+    color: #0072c6;
+}
+
+.cd-font {
+    font-family: 'Segoe UI Light';
+    color: #0072c6;
+}
+
+.editor { 
+    position: relative;
+    height: 610px;
+}

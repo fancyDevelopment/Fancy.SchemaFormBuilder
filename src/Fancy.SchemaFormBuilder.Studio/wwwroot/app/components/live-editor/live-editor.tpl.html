@@ -1,0 +1,57 @@
+﻿<div class="row">
+    <!-- Left side -->
+    <div class="col-sm-6">
+        <ul class="nav nav-tabs nav-justified">
+          <li class="active"><a href="#"><h3>DTO written in C#</h3></a></li>
+        </ul>
+        <div class="editor" ui-ace="{theme: 'monokai', mode: 'csharp', onChange: vm.compileAndRender}" ng-model="vm.code" >
+        </div>
+    </div>
+    <!-- Right side -->
+    <div class="col-sm-6">
+        <ul class="nav nav-tabs nav-justified">
+          <li ng-class="{'active': vm.showDtoExplorer}"><a ng-click="vm.showDtoExplorer = true"><h3>DTO Explorer</h3></a></li>
+          <li ng-class="{'active': !vm.showDtoExplorer}"><a ng-click="vm.showDtoExplorer = false"><h3>Live Peview</h3></a></li>
+        </ul>
+        <br />
+        <!-- Live Preview -->
+        <div ng-show="!vm.showDtoExplorer">
+            <form ng-show="vm.compileResult.CompilationSuccessfull" sf-schema="vm.compileResult.Schema" 
+                  sf-form="vm.compileResult.Form">
+            </form>
+            <!-- Show erros if compilation failed -->
+            <div ng-show="!vm.compileResult.CompilationSuccessfull">
+                <label>Compile Errors:</label>
+                <div ng-repeat="error in vm.compileResult.ErrorMessages"><pre>{{error}}</pre></div>
+            </div>
+        </div>
+        <!-- DTO Explorer -->
+        <div ng-show="vm.showDtoExplorer">
+            <h3>Examples <small>Choose from one of the prepared examples.</small></h3>
+            <hr />
+            <select class="form-control" ng-model="vm.selectedExample" ng-change="vm.loadExample()">
+              <option ng-repeat="e in vm.exampleNames" value="{{e}}">{{e}}</option>
+            </select>
+            <br />
+            <h3>Library <small>Save and load Dtos to and from your browser storage</small></h3>
+            <hr />
+            <h4>Save Dto</h4>
+            <div class="input-group">
+              <input type="text" class="form-control" ng-model="vm.dtoName" placeholder="Name of you dto ...">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="vm.saveLocalDto()">Save</button>
+              </span>
+            </div>
+            <br />
+            <h4>Existing Dtos</h4>
+            <ul class="list-group">
+              <li ng-repeat="dto in vm.localDtoNames" class="list-group-item">
+                  <a class="badge" ng-click="vm.deleteLocalDto(dto)">Delete</a>
+                  <a class="badge" ng-click="vm.loadLocalDto(dto)">Load</a>
+                  {{dto}}
+              </li>
+            </ul>
+            <p ng-hide="vm.localDtoNames.length"><small>You have not yet saved a DTO!</small></p>
+        </div>
+    </div>
+</div>
