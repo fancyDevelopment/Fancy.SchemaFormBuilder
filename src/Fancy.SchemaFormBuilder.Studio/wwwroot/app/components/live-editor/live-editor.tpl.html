@@ -4,7 +4,7 @@
         <ul class="nav nav-tabs nav-justified">
           <li class="active"><a href="#"><h3>DTO written in C#</h3></a></li>
         </ul>
-        <div class="editor" ui-ace="{theme: 'monokai', mode: 'csharp', onChange: vm.compileAndRender}" ng-model="vm.code" >
+        <div class="editor" ui-ace="{theme: 'monokai', mode: 'csharp', onChange: vm.onCodeChanged}" ng-model="vm.code" >
         </div>
     </div>
     <!-- Right side -->
