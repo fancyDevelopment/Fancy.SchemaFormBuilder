@@ -19,14 +19,6 @@ namespace Fancy.SchemaFormBuilder.Services
         private SchemaBuilder _schemaBuilder;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SchemaFormBuilderBase"/> class.
-        /// </summary>
-        public SchemaFormBuilderBase()
-        {
-            Initialize();
-        }
-
-        /// <summary>
         /// Creates the schema form info object to the specified type.
         /// </summary>
         /// <param name="type">The type.</param>
@@ -57,6 +49,18 @@ namespace Fancy.SchemaFormBuilder.Services
         }
 
         /// <summary>
+        /// Initializes this instance.
+        /// </summary>
+        protected void Initialize()
+        {
+            _formBuilder = new FormBuilder();
+            _schemaBuilder = new SchemaBuilder();
+
+            ConfigureFormBuilder(_formBuilder);
+            ConfigureSchemaBuilder(_schemaBuilder);
+        }
+
+        /// <summary>
         /// Configures the form builder.
         /// </summary>
         /// <param name="formBuilder">The form builder.</param>
@@ -67,17 +71,5 @@ namespace Fancy.SchemaFormBuilder.Services
         /// </summary>
         /// <param name="schemaBuilder">The schema builder.</param>
         protected abstract void ConfigureSchemaBuilder(SchemaBuilder schemaBuilder);
-
-        /// <summary>
-        /// Initializes this instance.
-        /// </summary>
-        private void Initialize()
-        {
-            _formBuilder = new FormBuilder();
-            _schemaBuilder = new SchemaBuilder();
-
-            ConfigureFormBuilder(this._formBuilder);
-            ConfigureSchemaBuilder(this._schemaBuilder);
-        }
     }
 }
