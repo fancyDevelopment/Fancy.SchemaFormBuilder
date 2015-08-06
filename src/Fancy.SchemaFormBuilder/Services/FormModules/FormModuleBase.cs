@@ -40,7 +40,7 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="cultureInfo">The culture information.</param>
-        /// <returns></returns>
+        /// <returns>The string for the requested key.</returns>
         protected string GetTextForKey(string key, CultureInfo cultureInfo)
         {
             if (_languageProvider != null)
