@@ -46,5 +46,7 @@ namespace Fancy.SchemaFormBuilder.Annotations
         /// The title.
         /// </value>
         public string Title { get; set; }
+
+        public string Condition { get; set; }
     }
 }

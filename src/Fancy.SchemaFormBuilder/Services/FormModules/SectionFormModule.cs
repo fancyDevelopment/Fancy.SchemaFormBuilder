@@ -50,7 +50,7 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
                 // Is the hierarchy already in the form?
                 hierachyObject = FindFormHierarchyObject(context.CompleteForm, formHierarchy.HierarchyPath, true);
 
-                UpdateFormHierarchyObject(hierachyObject, formHierarchy, context.TargetCulture);
+                UpdateFormHierarchyObject(hierachyObject, formHierarchy, context);
             }
 
             // ReSharper disable once PossibleNullReferenceException because we make sure to have at least one object in the hierarcy
@@ -72,13 +72,20 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
         /// </summary>
         /// <param name="hierarchyObject">The hierarchy object.</param>
         /// <param name="formSection">The form section.</param>
-        public void UpdateFormHierarchyObject(JObject hierarchyObject, FormSectionAttribute formSection, CultureInfo targetCulture)
+        public void UpdateFormHierarchyObject(JObject hierarchyObject, FormSectionAttribute formSection, FormBuilderContext context)
         {
             hierarchyObject["type"] = ConvertSectionType(formSection.SectionType);
 
             if (!string.IsNullOrEmpty(formSection.Title))
             {
-                hierarchyObject["title"] = GetTextForKey(formSection.Title, targetCulture);
+                hierarchyObject["title"] = GetTextForKey(formSection.Title, context.TargetCulture);
+            }
+
+            if(!string.IsNullOrEmpty(formSection.Condition))
+            {
+                string condition = ConvertConditionToAbsolutePath(context.ObjectType.Name, context.FullPropertyPath, formSection.Condition);
+
+                hierarchyObject["condition"] = new JValue(condition);
             }
         }
 
@@ -158,6 +165,26 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
                 default:
                     return "section";
             }
+        }
+
+        private string ConvertConditionToAbsolutePath(string typeName, string fullPropertyPath, string conditionExpression)
+        {
+            string fullPathToObject = "model";
+
+            // Check the property path is valid
+            if (!conditionExpression.Contains('.'))
+            {
+                throw new InvalidOperationException("The condition must start with the type name and must navigate to a property.");
+            }
+
+            // Set up the path to the object
+            if (fullPropertyPath.Contains('.'))
+            {
+                // Clip the last path item because we want only the path to the object and not to the property itself
+                fullPathToObject = fullPathToObject + "." + fullPropertyPath.Substring(0, fullPropertyPath.LastIndexOf('.'));
+            }
+
+            return conditionExpression.Replace(typeName, fullPathToObject);
         }
     }
 }
