@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
@@ -83,7 +82,7 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
 
             if(!string.IsNullOrEmpty(formSection.Condition))
             {
-                string condition = ConvertConditionToAbsolutePath(context.ObjectType.Name, context.FullPropertyPath, formSection.Condition);
+                string condition = FormModuleHelper.ConvertConditionToAbsolutePath(context.ObjectType.Name, context.FullPropertyPath, formSection.Condition);
 
                 hierarchyObject["condition"] = new JValue(condition);
             }
@@ -165,26 +164,6 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
                 default:
                     return "section";
             }
-        }
-
-        private string ConvertConditionToAbsolutePath(string typeName, string fullPropertyPath, string conditionExpression)
-        {
-            string fullPathToObject = "model";
-
-            // Check the property path is valid
-            if (!conditionExpression.Contains('.'))
-            {
-                throw new InvalidOperationException("The condition must start with the type name and must navigate to a property.");
-            }
-
-            // Set up the path to the object
-            if (fullPropertyPath.Contains('.'))
-            {
-                // Clip the last path item because we want only the path to the object and not to the property itself
-                fullPathToObject = fullPathToObject + "." + fullPropertyPath.Substring(0, fullPropertyPath.LastIndexOf('.'));
-            }
-
-            return conditionExpression.Replace(typeName, fullPathToObject);
         }
     }
 }

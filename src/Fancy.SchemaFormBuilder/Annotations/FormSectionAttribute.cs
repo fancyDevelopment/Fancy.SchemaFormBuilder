@@ -14,7 +14,7 @@ namespace Fancy.SchemaFormBuilder.Annotations
         /// <param name="hierarchyPath">The hierarchy path.</param>
         public FormSectionAttribute(string hierarchyPath)
         {
-            this.HierarchyPath = hierarchyPath;
+            HierarchyPath = hierarchyPath;
         }
 
         /// <summary>
@@ -47,6 +47,12 @@ namespace Fancy.SchemaFormBuilder.Annotations
         /// </value>
         public string Title { get; set; }
 
+        /// <summary>
+        /// Gets or sets the condition which decides weather to show the entire section or not.
+        /// </summary>
+        /// <value>
+        /// The condition.
+        /// </value>
         public string Condition { get; set; }
     }
 }
