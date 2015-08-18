@@ -38,7 +38,7 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
 
             foreach (FormTextAttribute textAttribute in texts)
             {
-                string text = GetTextForKey(textAttribute.Text, context.TargetCulture);
+                string text = GetTextForKey(textAttribute.Text, context);
 
                 // Create the help JSON object
                 JObject textObject = new JObject();

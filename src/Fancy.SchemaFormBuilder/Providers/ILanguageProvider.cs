@@ -11,8 +11,10 @@ namespace Fancy.SchemaFormBuilder.Providers
         /// Gets the text for a specific key in a specific language.
         /// </summary>
         /// <param name="key">The key.</param>
-        /// <param name="culture">The culture.</param>
-        /// <returns>The text.</returns>
-        string GetTextForKey(string key, CultureInfo culture);
+        /// <param name="languageContext">The language context.</param>
+        /// <returns>
+        /// The text.
+        /// </returns>
+        string GetTextForKey(string key, LanguageContext languageContext);
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿using Fancy.SchemaFormBuilder.Providers;
+using System;
+using System.Globalization;
 using System.Reflection;
 
 namespace Fancy.SchemaFormBuilder.Services
@@ -13,8 +15,16 @@ namespace Fancy.SchemaFormBuilder.Services
         /// </summary>
         public SchemaBuilderContext()
         {
-            this.Element = new SchemaElement();
+            Element = new SchemaElement();
         }
+
+        /// <summary>
+        /// Gets the type of the dto beeing process in this context.
+        /// </summary>
+        /// <value>
+        /// The type of the dto.
+        /// </value>
+        public Type DtoType { get; internal set; }
 
         /// <summary>
         /// Gets the schema builder.
@@ -59,5 +69,14 @@ namespace Fancy.SchemaFormBuilder.Services
         /// The target culture.
         /// </value>
         public CultureInfo TargetCulture { get; set; }
+
+        /// <summary>
+        /// Gets the language context.
+        /// </summary>
+        /// <returns></returns>
+        public LanguageContext GetLanguageContext()
+        {
+            return new LanguageContext { Culture = TargetCulture, DtoType = DtoType };
+        }
     }
 }

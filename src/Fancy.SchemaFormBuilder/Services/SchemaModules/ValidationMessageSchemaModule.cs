@@ -27,7 +27,7 @@ namespace Fancy.SchemaFormBuilder.Services.SchemaModules
             if (context.Property.GetCustomAttribute<FormValidationMessageAttribute>() != null)
             {
                 FormValidationMessageAttribute validationMessage = context.Property.GetCustomAttribute<FormValidationMessageAttribute>();
-                context.Element.GetOrCreateSchemaObject()["validationMessage"] = GetTextForKey(validationMessage.MessageText, context.TargetCulture);
+                context.Element.GetOrCreateSchemaObject()["validationMessage"] = GetTextForKey(validationMessage.MessageText, context);
             }
         }
     }

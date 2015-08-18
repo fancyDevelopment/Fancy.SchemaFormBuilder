@@ -77,12 +77,12 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
 
             if (!string.IsNullOrEmpty(formSection.Title))
             {
-                hierarchyObject["title"] = GetTextForKey(formSection.Title, context.TargetCulture);
+                hierarchyObject["title"] = GetTextForKey(formSection.Title, context);
             }
 
             if(!string.IsNullOrEmpty(formSection.Condition))
             {
-                string condition = FormModuleHelper.ConvertConditionToAbsolutePath(context.ObjectType.Name, context.FullPropertyPath, formSection.Condition);
+                string condition = FormModuleHelper.ConvertConditionToAbsolutePath(context.DtoType.Name, context.FullPropertyPath, formSection.Condition);
 
                 hierarchyObject["condition"] = new JValue(condition);
             }

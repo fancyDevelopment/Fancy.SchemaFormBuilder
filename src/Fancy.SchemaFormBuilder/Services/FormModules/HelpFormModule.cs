@@ -41,7 +41,7 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
             {
                 string helpCssClases = DetermineHelpCssClasses(help.HelpType);
 
-                string helpText = GetTextForKey(help.HelpText, context.TargetCulture);
+                string helpText = GetTextForKey(help.HelpText, context);
 
                 // Create the help JSON object
                 JObject helpObject = new JObject();
@@ -50,7 +50,7 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
 
                 if (!string.IsNullOrEmpty(help.Condition))
                 {
-                    helpObject["condition"] = ConvertConditionToAbsolutePath(context.ObjectType.Name, context.FullPropertyPath, help.Condition);
+                    helpObject["condition"] = ConvertConditionToAbsolutePath(context.DtoType.Name, context.FullPropertyPath, help.Condition);
                 }
 
                 context.CurrentFormElementParent.Add(helpObject);

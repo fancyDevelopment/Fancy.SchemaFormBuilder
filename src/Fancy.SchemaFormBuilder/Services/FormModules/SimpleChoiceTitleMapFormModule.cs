@@ -37,7 +37,7 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
 
                 foreach (string value in simpleChoiceAttribute.Values)
                 {
-                    titleMap[value] = GetTextForKey(value, context.TargetCulture);
+                    titleMap[value] = GetTextForKey(value, context);
                 }
 
                 context.GetOrCreateCurrentFormElement()["type"] = new JValue("select");

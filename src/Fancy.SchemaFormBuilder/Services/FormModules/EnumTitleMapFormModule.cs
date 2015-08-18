@@ -57,7 +57,7 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
                     if (enumMember.GetCustomAttribute<FormTitleAttribute>() != null)
                     {
                         string titleKey = enumMember.GetCustomAttribute<FormTitleAttribute>().Title;
-                        title["name"] = GetTextForKey(titleKey, context.TargetCulture);
+                        title["name"] = GetTextForKey(titleKey, context);
                         titleMap.Add(title);
                     }
                 }

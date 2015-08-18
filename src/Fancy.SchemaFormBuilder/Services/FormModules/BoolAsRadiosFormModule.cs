@@ -33,12 +33,12 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
                 // Add yes title
                 JObject yesMap = new JObject();
                 yesMap["value"] = new JValue(true);
-                yesMap["name"] = new JValue(GetTextForKey(boolAsRadioAttribute.YesTitle, context.TargetCulture));
+                yesMap["name"] = new JValue(GetTextForKey(boolAsRadioAttribute.YesTitle, context));
                 titleMap.Add(yesMap);
 
                 JObject noMap = new JObject();
                 noMap["value"] = new JValue(false);
-                noMap["name"] = new JValue(GetTextForKey(boolAsRadioAttribute.NoTitle, context.TargetCulture));
+                noMap["name"] = new JValue(GetTextForKey(boolAsRadioAttribute.NoTitle, context));
                 titleMap.Add(noMap);
 
                 context.GetOrCreateCurrentFormElement()["type"] = new JValue("radios");

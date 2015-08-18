@@ -49,7 +49,7 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
 
                     if (!string.IsNullOrEmpty(arrayAttribute.AddButtonTitle))
                     {
-                        string addText = GetTextForKey(arrayAttribute.AddButtonTitle, context.TargetCulture);
+                        string addText = GetTextForKey(arrayAttribute.AddButtonTitle, context);
                         currentFormElement["add"] = new JValue(addText);
                     }
                 }

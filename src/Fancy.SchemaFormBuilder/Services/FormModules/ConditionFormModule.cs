@@ -23,7 +23,7 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
             // If the current property has a condition add it
             if (conditionAttribute != null)
             {
-                string condition = FormModuleHelper.ConvertConditionToAbsolutePath(context.ObjectType.Name, context.FullPropertyPath, conditionAttribute.Condition);
+                string condition = FormModuleHelper.ConvertConditionToAbsolutePath(context.DtoType.Name, context.FullPropertyPath, conditionAttribute.Condition);
 
                 context.GetOrCreateCurrentFormElement()["condition"] = new JValue(condition);
             }

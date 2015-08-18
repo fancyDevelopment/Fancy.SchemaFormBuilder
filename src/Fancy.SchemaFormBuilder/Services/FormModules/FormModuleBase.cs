@@ -39,14 +39,16 @@ namespace Fancy.SchemaFormBuilder.Services.FormModules
         /// Gets the text for key.
         /// </summary>
         /// <param name="key">The key.</param>
-        /// <param name="cultureInfo">The culture information.</param>
-        /// <returns>The string for the requested key.</returns>
-        protected string GetTextForKey(string key, CultureInfo cultureInfo)
+        /// <param name="formBuilderContext">The form builder context.</param>
+        /// <returns>
+        /// The string for the requested key.
+        /// </returns>
+        protected string GetTextForKey(string key, FormBuilderContext formBuilderContext)
         {
             if (_languageProvider != null)
             {
                 // If a language provider is availabe call it to get the text
-                return _languageProvider.GetTextForKey(key, cultureInfo);
+                return _languageProvider.GetTextForKey(key, formBuilderContext.GetLanguageContext());
             }
             else
             {

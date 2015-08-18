@@ -83,7 +83,7 @@ namespace Fancy.SchemaFormBuilder.Services
         {
             // Create the context for this property
             FormBuilderContext context = new FormBuilderContext();
-            context.ObjectType = objectType;
+            context.DtoType = objectType;
             context.Property = propertyInfo;
             context.CompleteForm = formElements;
             context.CurrentFormElementParent = formElements;

@@ -36,14 +36,16 @@ namespace Fancy.SchemaFormBuilder.Services.SchemaModules
         /// Gets the text for key.
         /// </summary>
         /// <param name="key">The key.</param>
-        /// <param name="cultureInfo">The culture information.</param>
-        /// <returns>The string for the requested key.</returns>
-        protected string GetTextForKey(string key, CultureInfo cultureInfo)
+        /// <param name="schemaBuilderContext">The schema builder context.</param>
+        /// <returns>
+        /// The string for the requested key.
+        /// </returns>
+        protected string GetTextForKey(string key, SchemaBuilderContext schemaBuilderContext)
         {
             if (_languageProvider != null)
             {
                 // If a language provider is availabe call it to get the text
-                return _languageProvider.GetTextForKey(key, cultureInfo);
+                return _languageProvider.GetTextForKey(key, schemaBuilderContext.GetLanguageContext());
             }
             else
             {

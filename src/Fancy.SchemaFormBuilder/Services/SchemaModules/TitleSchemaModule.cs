@@ -33,7 +33,7 @@ namespace Fancy.SchemaFormBuilder.Services.SchemaModules
                 JObject schemaObject = context.Element.GetOrCreateSchemaObject();
 
                 // Set the title to the current element
-                schemaObject["title"] = GetTextForKey(title, context.TargetCulture);
+                schemaObject["title"] = GetTextForKey(title, context);
             }
         }
     }

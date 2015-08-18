@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Reflection;
 
 using Newtonsoft.Json.Linq;
+using Fancy.SchemaFormBuilder.Providers;
 
 namespace Fancy.SchemaFormBuilder.Services
 {
@@ -20,12 +21,12 @@ namespace Fancy.SchemaFormBuilder.Services
         public IFormBuilder FormBuilder { get; internal set; }
 
         /// <summary>
-        /// Gets or sets the type of the object being processed.
+        /// Gets or sets the type of the dto beeing process in this context.
         /// </summary>
         /// <value>
-        /// The type of the object bein processed.
+        /// The type of the dto.
         /// </value>
-        public Type ObjectType { get; set; }
+        public Type DtoType { get; internal set; }
 
         /// <summary>
         /// Gets the property which is currently processed by the pipeline.
@@ -102,6 +103,15 @@ namespace Fancy.SchemaFormBuilder.Services
             }
 
             return CurrentFormElement;
+        }
+
+        /// <summary>
+        /// Gets the language context.
+        /// </summary>
+        /// <returns></returns>
+        public LanguageContext GetLanguageContext()
+        {
+            return new LanguageContext { Culture = TargetCulture, DtoType = DtoType };
         }
     }
 }

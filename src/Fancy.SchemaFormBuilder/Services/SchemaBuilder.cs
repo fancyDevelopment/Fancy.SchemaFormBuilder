@@ -42,7 +42,7 @@ namespace Fancy.SchemaFormBuilder.Services
             // Run through each property of the type
             foreach (PropertyInfo propertyInfo in propertyInfos)
             {
-                SchemaElement element = ProcessProperty(propertyInfo, cultureInfo);
+                SchemaElement element = ProcessProperty(type, propertyInfo, cultureInfo);
 
                 if (element.Schema != null)
                 {
@@ -86,15 +86,20 @@ namespace Fancy.SchemaFormBuilder.Services
         /// <summary>
         /// Processes a property through the pipeline modules.
         /// </summary>
+        /// <param name="objectType">Type of the object beeing processed.</param>
         /// <param name="propertyInfo">The property information.</param>
-        /// <returns>The schema element.</returns>
-        private SchemaElement ProcessProperty(PropertyInfo propertyInfo, CultureInfo cultureInfo)
+        /// <param name="cultureInfo">The culture information.</param>
+        /// <returns>
+        /// The schema element.
+        /// </returns>
+        private SchemaElement ProcessProperty(Type objectType, PropertyInfo propertyInfo, CultureInfo cultureInfo)
         {
             // Create the context for this property
             SchemaBuilderContext context = new SchemaBuilderContext();
             context.Property = propertyInfo;
             context.SchemaBuilder = this;
             context.TargetCulture = cultureInfo;
+            context.DtoType = objectType;
 
             // Run the property through each pipeline module
             foreach (ISchemaBuilderModule builderModule in _pipelineModules)
