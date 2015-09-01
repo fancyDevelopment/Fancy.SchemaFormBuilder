@@ -22,7 +22,7 @@ namespace Fancy.SchemaFormBuilder.Services.SchemaModules
 
                 // A schema type for a simple type could not be found, we assume the property references an complex type
                 // Build the schema for a complext type
-                JObject complexSchema = context.SchemaBuilder.BuildSchema(context.Property.PropertyType, context.TargetCulture);
+                JObject complexSchema = context.SchemaBuilder.BuildSchema(context.Property.PropertyType, context.OriginDtoType, context.TargetCulture);
 
                 currentSchemaObject["title"] = new JValue(context.Property.Name);
 

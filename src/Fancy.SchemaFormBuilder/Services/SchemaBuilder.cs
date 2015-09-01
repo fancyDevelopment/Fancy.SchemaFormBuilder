@@ -29,10 +29,25 @@ namespace Fancy.SchemaFormBuilder.Services
         /// Builds the JSON schema for a specified type.
         /// </summary>
         /// <param name="type">The type to build the schema for.</param>
+        /// <param name="cultureInfo"></param>
         /// <returns>
         /// The JSON schema.
         /// </returns>
         public JObject BuildSchema(Type type, CultureInfo cultureInfo)
+        {
+            return BuildSchema(type, type, cultureInfo);
+        }
+
+        /// <summary>
+        /// Builds the JSON schema for a specified type.
+        /// </summary>
+        /// <param name="type">The type to build the schema for.</param>
+        /// <param name="originType">Type of the origin object for which the processing was started.</param
+        /// <param name="cultureInfo">The culture information.</param>
+        /// <returns>
+        /// The JSON schema.
+        /// </returns>
+        public JObject BuildSchema(Type type, Type originType, CultureInfo cultureInfo)
         {
             PropertyInfo[] propertyInfos = type.GetProperties();
             
@@ -42,7 +57,7 @@ namespace Fancy.SchemaFormBuilder.Services
             // Run through each property of the type
             foreach (PropertyInfo propertyInfo in propertyInfos)
             {
-                SchemaElement element = ProcessProperty(type, propertyInfo, cultureInfo);
+                SchemaElement element = ProcessProperty(type, originType, propertyInfo, cultureInfo);
 
                 if (element.Schema != null)
                 {
@@ -87,12 +102,13 @@ namespace Fancy.SchemaFormBuilder.Services
         /// Processes a property through the pipeline modules.
         /// </summary>
         /// <param name="objectType">Type of the object beeing processed.</param>
+        /// <param name="originObjectType">Type of the origin object.</param>
         /// <param name="propertyInfo">The property information.</param>
         /// <param name="cultureInfo">The culture information.</param>
         /// <returns>
         /// The schema element.
         /// </returns>
-        private SchemaElement ProcessProperty(Type objectType, PropertyInfo propertyInfo, CultureInfo cultureInfo)
+        private SchemaElement ProcessProperty(Type objectType, Type originObjectType, PropertyInfo propertyInfo, CultureInfo cultureInfo)
         {
             // Create the context for this property
             SchemaBuilderContext context = new SchemaBuilderContext();
@@ -100,6 +116,7 @@ namespace Fancy.SchemaFormBuilder.Services
             context.SchemaBuilder = this;
             context.TargetCulture = cultureInfo;
             context.DtoType = objectType;
+            context.OriginDtoType = originObjectType;
 
             // Run the property through each pipeline module
             foreach (ISchemaBuilderModule builderModule in _pipelineModules)

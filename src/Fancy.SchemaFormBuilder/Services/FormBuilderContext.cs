@@ -29,6 +29,14 @@ namespace Fancy.SchemaFormBuilder.Services
         public Type DtoType { get; internal set; }
 
         /// <summary>
+        /// Gets or sets the type of the origin dto which finally led to the processing of the <see cref="DtoType"/>.
+        /// </summary>
+        /// <value>
+        /// The type of the origin dto.
+        /// </value>
+        public Type OriginDtoType { get; set; }
+
+        /// <summary>
         /// Gets the property which is currently processed by the pipeline.
         /// </summary>
         /// <value>
@@ -111,7 +119,7 @@ namespace Fancy.SchemaFormBuilder.Services
         /// <returns></returns>
         public LanguageContext GetLanguageContext()
         {
-            return new LanguageContext { Culture = TargetCulture, DtoType = DtoType };
+            return new LanguageContext { Culture = TargetCulture, DtoType = DtoType, OriginDtoType = OriginDtoType };
         }
     }
 }

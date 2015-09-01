@@ -34,18 +34,20 @@ namespace Fancy.SchemaFormBuilder.Services
         /// </returns>
         public JContainer BuildForm(Type type, CultureInfo cultureInfo)
         {
-            return BuildForm(type, cultureInfo, string.Empty);
+            return BuildForm(type, type, cultureInfo, string.Empty);
         }
 
         /// <summary>
         /// Builds a form starting from a specified property path.
         /// </summary>
         /// <param name="type">The type.</param>
+        /// <param name="originType">Type of the origin object for which the processing was started.</param>
+        /// <param name="cultureInfo">The culture information.</param>
         /// <param name="sourcePropertyPath">The source property path to use as start.</param>
         /// <returns>
         /// A description of the form in JSON
         /// </returns>
-        public JContainer BuildForm(Type type, CultureInfo cultureInfo, string sourcePropertyPath)
+        public JContainer BuildForm(Type type, Type originType, CultureInfo cultureInfo, string sourcePropertyPath)
         {
             PropertyInfo[] propertyInfos = type.GetProperties();
 
@@ -54,7 +56,7 @@ namespace Fancy.SchemaFormBuilder.Services
             // Run through each property of the type
             foreach (PropertyInfo propertyInfo in propertyInfos)
             {
-                formElements = ProcessProperty(type, propertyInfo, formElements, sourcePropertyPath, cultureInfo);
+                formElements = ProcessProperty(type, originType, propertyInfo, formElements, sourcePropertyPath, cultureInfo);
             }
 
             return formElements;
@@ -73,17 +75,20 @@ namespace Fancy.SchemaFormBuilder.Services
         /// Processes a property through the pipeline modules.
         /// </summary>
         /// <param name="objectType">Type of the object.</param>
+        /// <param name="originObjectType">Type of the origin object.</param>
         /// <param name="propertyInfo">The property information.</param>
         /// <param name="formElements">The form elements.</param>
         /// <param name="sourcePropertyPath">The source property path to use as start.</param>
+        /// <param name="cultureInfo">The culture information.</param>
         /// <returns>
         /// The form element.
         /// </returns>
-        private JArray ProcessProperty(Type objectType, PropertyInfo propertyInfo, JArray formElements, string sourcePropertyPath, CultureInfo cultureInfo)
+        private JArray ProcessProperty(Type objectType, Type originObjectType, PropertyInfo propertyInfo, JArray formElements, string sourcePropertyPath, CultureInfo cultureInfo)
         {
             // Create the context for this property
             FormBuilderContext context = new FormBuilderContext();
             context.DtoType = objectType;
+            context.OriginDtoType = originObjectType;
             context.Property = propertyInfo;
             context.CompleteForm = formElements;
             context.CurrentFormElementParent = formElements;

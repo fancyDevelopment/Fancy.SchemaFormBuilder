@@ -23,5 +23,13 @@ namespace Fancy.SchemaFormBuilder.Providers
         /// The type of the dto.
         /// </value>
         public Type DtoType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type of the origin dto which finally led to the processing of the <see cref="DtoType"/>.
+        /// </summary>
+        /// <value>
+        /// The type of the origin dto.
+        /// </value>
+        public Type OriginDtoType { get; set; }
     }
 }

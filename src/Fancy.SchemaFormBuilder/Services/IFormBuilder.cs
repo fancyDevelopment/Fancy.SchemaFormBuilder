@@ -21,10 +21,11 @@ namespace Fancy.SchemaFormBuilder.Services
         /// Builds a sub form starting from a specified property path.
         /// </summary>
         /// <param name="type">The type.</param>
+        /// <param name="originType">Type of the origin object for which the processing was started.</param
         /// <param name="sourcePropertyPath">The source property path to use as start.</param>
         /// <returns>
         /// A description of the form in JSON
         /// </returns>
-        JContainer BuildForm(Type type, CultureInfo cultureInfo, string sourcePropertyPath);
+        JContainer BuildForm(Type type, Type originType, CultureInfo cultureInfo, string sourcePropertyPath);
     }
 }

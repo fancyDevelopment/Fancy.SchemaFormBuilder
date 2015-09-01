@@ -32,7 +32,7 @@ namespace Fancy.SchemaFormBuilder.Services.SchemaModules
                     Type underlyingType = context.Property.PropertyType.GetGenericArguments()[0];
 
                     // Build the schema for a complext type
-                    JObject complexSchema = context.SchemaBuilder.BuildSchema(underlyingType, context.TargetCulture);
+                    JObject complexSchema = context.SchemaBuilder.BuildSchema(underlyingType, context.OriginDtoType, context.TargetCulture);
 
                     currentSchemaObject["title"] = new JValue(context.Property.Name);
                     currentSchemaObject["type"] = new JValue("array");
