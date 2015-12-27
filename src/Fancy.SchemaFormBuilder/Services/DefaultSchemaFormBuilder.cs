@@ -26,6 +26,8 @@ namespace Fancy.SchemaFormBuilder.Services
         {
             _urlLookupProvider = null;
             _languageProvider = null;
+
+            Initialize();
         }
 
         /// <summary>

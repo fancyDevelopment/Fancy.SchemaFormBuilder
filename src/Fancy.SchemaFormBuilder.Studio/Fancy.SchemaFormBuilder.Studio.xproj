@@ -16,5 +16,8 @@
     <DevelopmentServerPort>15898</DevelopmentServerPort>
     <GruntGulpQueried>True</GruntGulpQueried>
   </PropertyGroup>
+  <ItemGroup>
+    <DnxInvisibleFolder Include="bower_components\" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>
