@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Schema Form Builder Sample App</title>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body ng-app="fancy.schema-form-builder-sample">
+
+    <div class="container">
+
+        <div class="page-header">
+            <h1>Schema Form Builder - Sample App</h1>
+            <p class="lead">
+                An app to demonstrate the use of the Fancy.SchemaFormBuilder project.
+            </p>
+        </div>
+
+        <p>
+            This app demonstrates how you can use the Fancy.SchemaFormBuilder project. You can find the sources and the
+            documentation of the project <a href="https://github.com/fancyDevelopment/Fancy.SchemaFormBuilder">here</a> on GitHub.
+            This sample app demonstrates how you could build a form and a rest controller to manage employees.
+        </p>
+
+        <!-- Apply the controller of the app to this div scope -->
+        <div ng-controller="MainController">
+
+            <h3>Employee Form</h3>
+            <hr />
+
+            <!-- Render the form using the metadata retrieved by the controller -->
+            <form name="employeeForm"
+                  sf-schema="formInfo.Schema"
+                  sf-form="formInfo.Form"
+                  sf-model="formInfo.Data"></form>
+
+            <!-- Render a button to submit the form -->
+            <button class="btn btn-primary" ng-click="submitForm(employeeForm)">Submit</button>
+
+            <h3>All Employees</h3>
+            <hr />
+            <div ng-repeat="employee in allEmployees">
+                <h4>{{employee.FirstName}} {{employee.LastName}} <small>Created: {{employee.Created | date:'medium'}} Last Modified: {{employee.LastModified | date:'medium'}}</small></h4>
+                <div class="row">
+                    <div class="col-md-5">
+                        <strong>Contact Data</strong><br />
+                        <label>E-Mail:</label> {{employee.EMail}}<br />
+                        <label>Phone:</label> {{employee.Phone}} <br />
+                        <label>Mobile:</label> {{employee.Mobile}}
+                    </div>
+                    <div class="col-md-5">
+                        <strong>Address</strong>
+                        <address>
+                            {{employee.StreetNr}} {{employee.Street}}<br />
+                            {{employee.ZipCode}} {{employee.City}}
+                        </address>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn" ng-click="loadEmployeeForEdit(employee.Id)">Edit</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Reference all required scripts -->
+    <script type="text/javascript" src="lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="lib/tv4/tv4.js"></script>
+    <script type="text/javascript" src="lib/objectpath/lib/ObjectPath.js"></script>
+    <script type="text/javascript" src="lib/angular-schema-form/dist/schema-form.min.js"></script>
+    <script type="text/javascript" src="lib/angular-schema-form/dist/bootstrap-decorator.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+
+</body>
+</html>
