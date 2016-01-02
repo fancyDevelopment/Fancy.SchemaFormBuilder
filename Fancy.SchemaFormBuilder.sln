@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D4090CC2-4DD5-4BB9-AA62-1C57B720E2BC}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Fancy.SchemaFormBuilder", "src\Fancy.SchemaFormBuilder\Fancy.SchemaFormBuilder.xproj", "{097B0D26-B7EC-4479-9A53-E7FA89FA848F}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Fancy.SchemaFormBuilder.Studio", "src\Fancy.SchemaFormBuilder.Studio\Fancy.SchemaFormBuilder.Studio.xproj", "{DDCC7313-E3FA-4676-AFD9-4ECB2353190B}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Fancy.SchemaFormBuilder.Sample", "src\Fancy.SchemaFormBuilder.Sample\Fancy.SchemaFormBuilder.Sample.xproj", "{8F255BF3-287A-4BF4-AE17-BF0E3F96EC85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{DDCC7313-E3FA-4676-AFD9-4ECB2353190B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDCC7313-E3FA-4676-AFD9-4ECB2353190B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDCC7313-E3FA-4676-AFD9-4ECB2353190B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F255BF3-287A-4BF4-AE17-BF0E3F96EC85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F255BF3-287A-4BF4-AE17-BF0E3F96EC85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F255BF3-287A-4BF4-AE17-BF0E3F96EC85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F255BF3-287A-4BF4-AE17-BF0E3F96EC85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,5 +36,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{097B0D26-B7EC-4479-9A53-E7FA89FA848F} = {D4090CC2-4DD5-4BB9-AA62-1C57B720E2BC}
 		{DDCC7313-E3FA-4676-AFD9-4ECB2353190B} = {D4090CC2-4DD5-4BB9-AA62-1C57B720E2BC}
+		{8F255BF3-287A-4BF4-AE17-BF0E3F96EC85} = {D4090CC2-4DD5-4BB9-AA62-1C57B720E2BC}
 	EndGlobalSection
 EndGlobal
