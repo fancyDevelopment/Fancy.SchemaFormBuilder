@@ -1,6 +1,7 @@
 ﻿{
   "userSecretsId": "aspnet5-Fancy.SchemaFormBuilder.Sample-c8d9d496-9593-42a4-9e10-0ef94c54f8d3",
   "version": "1.0.0-*",
+
   "compilationOptions": {
     "emitEntryPoint": true
   },

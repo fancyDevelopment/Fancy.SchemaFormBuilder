@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Fancy.SchemaFormBuilder.Studio
@@ -13,11 +14,18 @@ namespace Fancy.SchemaFormBuilder.Studio
 
         public void Configure(IApplicationBuilder app)
         {
-            // Add static files to the request pipeline.
+            app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
+
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
-            // Add MVC to the request pipeline.
             app.UseMvc();
         }
+
+        /// <summary>
+        /// Entry point for the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }
