@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 
 using Fancy.SchemaFormBuilder.Sample.ViewModels;
-using Fancy.SchemaFormBuilder.Services;
-
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,8 +30,8 @@ namespace Fancy.SchemaFormBuilder.Sample
         public void ConfigureServices(IServiceCollection services)
         {
             // Add the shema for builder project
-            services.AddTransient<ISchemaFormBuilder, DefaultSchemaFormBuilder>();
-
+            services.AddDefaultSchemaFormBuilder();
+            
             // Add mvc services
             services.AddMvc();
         }
