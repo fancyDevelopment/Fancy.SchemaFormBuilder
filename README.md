@@ -10,11 +10,10 @@ forms without having to write any html form specific code (apart from the single
 ## Walkthrough
 For a base introduction on how to use the library have a look at [this blog post](http://www.fancy-development.net/how-to-create-nice-interactive-html-5-forms-the-easy-way)
 
-For a better understand you should have a base knowledge of the [angular-schema-form](https://github.com/Textalk/angular-schema-form) project.
+For a better understanding you should have a base knowledge of the [angular-schema-form](https://github.com/Textalk/angular-schema-form) project.
+
+Also have a look at the [Sample Application](https://github.com/fancyDevelopment/Fancy.SchemaFormBuilder/tree/master/src/Fancy.SchemaFormBuilder.Sample) which shows you a complete end to end example on how to use the library based on ASP.NET Core.
 
 ## Live Editor
 Try out [Schema Form Builder Studio](http://fancydevelopment-schemaformbuilderstudio.azurewebsites.net "Schema Form Builder Studio") for live examples and use it to 
 design your DTOs.
-
-
-More Documentation is comming, stay tuned!
