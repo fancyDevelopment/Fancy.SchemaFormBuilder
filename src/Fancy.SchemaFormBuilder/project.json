@@ -1,21 +1,22 @@
 {
 	"version": "0.0.7",
 	"author": "fancy Development - Daniel Murrmann",
+	"title": "Fancy.SchemaFormBuilder",
 	"description": "Builds form and schema JSON from data transfer objects.",
 	"dependencies": {
-    "Newtonsoft.Json": "7.0.1",
-    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final"
+		"Newtonsoft.Json": "9.0.1",
+		"Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
+		"System.Reflection.Extensions": "4.3.0", 
+		"System.Reflection.TypeExtensions": "4.3.0",
+		"System.Dynamic.Runtime": "4.3.0",
+		"System.Collections": "4.3.0", 
+		"System.Linq": "4.3.0"
 	},
-	"frameworks":{
-		"dnx451": {},
-		"dnxcore50":{
-			"dependencies":{
-				"System.Reflection.Extensions": "4.0.0-*", 
-				"System.Reflection.TypeExtensions": "4.0.0-*",
-				"System.Dynamic.Runtime": "4.0.0-*",
-				"System.Collections": "4.0.10-*", 
-				"System.Linq": "4.0.0-*"
-			}
-		}
-	}
+	"frameworks": {
+    "netstandard1.6": {
+      "dependencies": {
+        "NETStandard.Library": "1.6.1"
+      }
+    }
+  }
 }
