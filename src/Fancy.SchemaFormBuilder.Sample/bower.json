@@ -1,17 +1,13 @@
 {
-  "name": "ASP.NET",
+  "name": "fancy.schema-form.dependencies",
   "private": true,
   "dependencies": {
-    "bootstrap": "3.3.5",
-    "jquery": "2.1.4",
-    "angularjs": "1.4.8",
-    "angular-sanitize": "1.4.8",
-    "angular-schema-form": "0.8.12",
-    "tv4": "1.2.7",
-    "objectpath": "1.2.1"
-  },
-  "resolutions": {
-    "objectpath": "1.2.1",
-    "tv4": "1.2.7"
+    "bootstrap": "latest",
+    "jquery": "1.9.1",
+    "angularjs": "1.6.0",
+    "angular-sanitize": "1.6.0",
+    "angular-schema-form": "latest",
+    "tv4": "1.0.17",
+    "objectpath": "1.0.5"
   }
 }

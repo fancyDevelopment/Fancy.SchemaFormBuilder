@@ -12,28 +12,9 @@
 	    $scope.allEmployees = new Array();
 
 		// Load the metadata for a new employee
-	    // $http.get("employees/create").success(function(data) {
-		//     $scope.formInfo = data;
-	    // });
-
-		$scope.formInfo.Schema = {
-    type: "object",
-    properties: {
-      name: { type: "string", minLength: 2, title: "Name", description: "Name or alias" },
-      title: {
-        type: "string",
-        enum: ['dr','jr','sir','mrs','mr','NaN','dj']
-      }
-    }
-  };
-
-  $scope.formInfo.Form = [
-    "*",
-    {
-      type: "submit",
-      title: "Save"
-    }
-  ];
+	    $http.get("employees/create").then(function(data) {
+		    $scope.formInfo = data.data;
+	    });
 
 		// This function gets called by the form on submission
 	    $scope.submitForm = function(form) {
