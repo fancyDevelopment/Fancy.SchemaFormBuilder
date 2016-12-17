@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 
 using Fancy.SchemaFormBuilder.Sample.ViewModels;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -44,18 +44,10 @@ namespace Fancy.SchemaFormBuilder.Sample
         /// <param name="loggerFactory">The logger factory.</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
-
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseMvc();
         }
-
-        /// <summary>
-        /// Entry point for the application.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }

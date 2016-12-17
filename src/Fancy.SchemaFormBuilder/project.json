@@ -1,5 +1,5 @@
 {
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"author": "fancy Development - Daniel Murrmann",
 	"title": "Fancy.SchemaFormBuilder",
 	"description": "Builds form and schema JSON from data transfer objects.",

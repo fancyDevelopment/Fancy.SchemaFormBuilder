@@ -4,7 +4,7 @@ using System.Linq;
 using Fancy.SchemaFormBuilder.Sample.ViewModels;
 using Fancy.SchemaFormBuilder.Services;
 
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Fancy.SchemaFormBuilder.Sample.Controllers
 {
@@ -61,7 +61,7 @@ namespace Fancy.SchemaFormBuilder.Sample.Controllers
             if (employeeVm == null)
             {
                 // The employee could not be found
-                return HttpNotFound();
+                return NotFound();
             }
 
             // Create the metadata info for the type
@@ -98,7 +98,7 @@ namespace Fancy.SchemaFormBuilder.Sample.Controllers
             }
             
             // The employee could not be found
-            return this.HttpNotFound();
+            return NotFound();
         }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace Fancy.SchemaFormBuilder.Sample.Controllers
 
             if (employee == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             employee.Update(editEmployeeVm);
