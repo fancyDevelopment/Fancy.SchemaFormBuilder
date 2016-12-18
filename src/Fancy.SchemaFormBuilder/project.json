@@ -17,6 +17,13 @@
       "dependencies": {
         "NETStandard.Library": "1.6.1"
       }
+    },
+		"net451": {
+      "imports": [
+        "dotnet5.6",
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
     }
   }
 }

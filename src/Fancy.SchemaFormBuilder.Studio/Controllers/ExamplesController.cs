@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Collections.Generic;
 
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Fancy.SchemaFormBuilder.Studio.Controllers
 {   

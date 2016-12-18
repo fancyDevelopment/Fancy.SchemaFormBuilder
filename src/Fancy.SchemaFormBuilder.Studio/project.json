@@ -6,31 +6,46 @@
   },
 
   "dependencies": {
-    "Newtonsoft.Json": "8.0.1",
-    "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
-    "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final",
-    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
-    "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
+    "Microsoft.AspNetCore.Mvc": "1.1.0",
+    "Microsoft.AspNetCore.Routing": "1.1.0",
+    "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
+    "Microsoft.AspNetCore.StaticFiles": "1.1.0",
     "Microsoft.CodeAnalysis.CSharp": "1.0.0",
-    "Fancy.SchemaFormBuilder": ""
+    "Fancy.SchemaFormBuilder": "0.0.8"
   },
 
   "frameworks": {
-    "dnx451": {
-      "dependencies": {
-      }
+    "net451": {
+      "frameworkAssemblies": {
+            "System.Runtime": {
+                "type": "build",
+                "version": "4.0.0"
+            }
+        },
+      "imports": [
+        "dotnet5.6",
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
     }
   },
 
-  "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel"
+  "buildOptions": {
+    "debugType": "portable",
+    "emitEntryPoint": true,
+    "preserveCompilationContext": true
+  },
+
+  "runtimeOptions": {
+    "configProperties": {
+      "System.GC.Server": true
+    }
   },
 
   "exclude": [
     "wwwroot",
     "node_modules",
     "bower_components"
-  ],
-
-  "resource": "Resources/**/*.*"
+  ]
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Fancy.SchemaFormBuilder.Studio.Dtos;
 using Fancy.SchemaFormBuilder.Studio.Compiling;
 using Fancy.SchemaFormBuilder.Services;
